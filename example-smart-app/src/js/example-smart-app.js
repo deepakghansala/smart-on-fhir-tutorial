@@ -21,6 +21,7 @@
                               'http://loinc.org|2085-9', // Cholesterol in HDL
                               'http://loinc.org|2089-1', // Cholesterol in LDL
                               // 'http://loinc.org|55284-4', // Blood pressure systolic and diastolic
+                              'http://loinc.org|8310-5', // Body temperature
                               'http://loinc.org|85354-9'] // Blood pressure panel with all children optional
                       }
                     }
