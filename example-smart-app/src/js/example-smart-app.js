@@ -26,18 +26,12 @@
                       }
                     }
                   });
-var alg = smart.patient.api.fetchAll({
-                    type: 'AllergyIntolerance',
-                    query: {
-                      "clinical-status": "active"
-                    }
-                  });
-        $.when(pt, obv, alg).fail(onError);
 
-        $.when(pt, obv, alg).done(function(patient, obv, allergies) {
+        $.when(pt, obv).fail(onError);
+
+        $.when(pt, obv).done(function(patient, obv) {
           console.log(patient);
           console.log(obv);
-          console.log(allergies);
           var gender = patient.gender;
 
           var fname = '';
@@ -54,22 +48,7 @@ var alg = smart.patient.api.fetchAll({
           var diastolicbp = getBloodPressureValue(byCodes('85354-9'),'8462-4');
           var hdl = byCodes('2085-9');
           var ldl = byCodes('2089-1');
-    		  var allergyTable = "<table>";
-    		  var allergyLen = allergies.length;
-    		  for (var i=0;i<allergyLen;i++){
-    			  var reactionStr = [];
-    			  if(allergies[i].reaction !== undefined) {
-    				  for(var j=0,jLen=allergies[i].reaction.length;j<jLen;j++) {
-    					  reactionStr.push(allergies[i].reaction[j].manifestation[0].text);
-    				  }
-    			  }
-    			  allergyTable += "<tr><td>"+allergies[i].code.text+"</td><td>"+reactionStr.join(", ")+"</td></tr>";
-    		  }
-    		  if (allergyLen === 0) {
-    			  allergyTable += "<tr><td>No Allergies Found</td></tr>";
-    		  }
-    		  allergyTable += "</table>";
-          var p = defaultPatient();
+    		  var p = defaultPatient();
           p.birthdate = patient.birthDate;
           p.gender = gender;
           p.fname = fname;
@@ -87,7 +66,6 @@ var alg = smart.patient.api.fetchAll({
           p.hdl = getQuantityValueAndUnit(hdl[0]);
           p.ldl = getQuantityValueAndUnit(ldl[0]);
           p.temperature = getQuantityValueAndUnit(temperature[0]);
-          p.allergies = allergyTable;
 
           ret.resolve(p);
         });
@@ -113,7 +91,6 @@ var alg = smart.patient.api.fetchAll({
       ldl: {value: ''},
       hdl: {value: ''},
       temperature: {value: ''},
-      allergies: {value: ''}
     };
   }
 
@@ -158,7 +135,6 @@ var alg = smart.patient.api.fetchAll({
     $('#ldl').html(p.ldl);
     $('#hdl').html(p.hdl);
     $('#temperature').html(p.temperature);
-    $('#allergyIntolerance').html(p.allergies);
   };
 
 })(window);
