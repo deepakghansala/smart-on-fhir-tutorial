@@ -32,6 +32,7 @@
         $.when(pt, obv).done(function(patient, obv) {
           console.log(patient);
           console.log(obv);
+          var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
 
           var fname = '';
@@ -48,7 +49,8 @@
           var diastolicbp = getBloodPressureValue(byCodes('85354-9'),'8462-4');
           var hdl = byCodes('2085-9');
           var ldl = byCodes('2089-1');
-    		  var p = defaultPatient();
+
+          var p = defaultPatient();
           p.birthdate = patient.birthDate;
           p.gender = gender;
           p.fname = fname;
@@ -90,7 +92,7 @@
       diastolicbp: {value: ''},
       ldl: {value: ''},
       hdl: {value: ''},
-      temperature: {value: ''},
+      temperature: {value: ''}
     };
   }
 
