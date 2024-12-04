@@ -43,6 +43,7 @@
             lname = patient.name[0].family;
           }
 
+          var temperature = byCodes('8310-5');
           var height = byCodes('8302-2');
           var systolicbp = getBloodPressureValue(byCodes('85354-9'),'8480-6');
           var diastolicbp = getBloodPressureValue(byCodes('85354-9'),'8462-4');
@@ -66,6 +67,7 @@
 
           p.hdl = getQuantityValueAndUnit(hdl[0]);
           p.ldl = getQuantityValueAndUnit(ldl[0]);
+          p.temperature = getQuantityValueAndUnit(temperature[0]);
 
           ret.resolve(p);
         });
@@ -90,6 +92,7 @@
       diastolicbp: {value: ''},
       ldl: {value: ''},
       hdl: {value: ''},
+      temperature: {value: ''}
     };
   }
 
@@ -133,6 +136,7 @@
     $('#diastolicbp').html(p.diastolicbp);
     $('#ldl').html(p.ldl);
     $('#hdl').html(p.hdl);
+    $('#temperature').html(p.temperature);
   };
 
 })(window);
