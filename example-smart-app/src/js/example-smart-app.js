@@ -38,10 +38,6 @@ var allergy = smart.patient.api.fetchAll({
           console.log(patient);
           console.log(obv);
           console.log(allergies);
-          const toAlert = [];
-          allg.forEach(($v) => { toAlert.push($v.code.text); });
-          \\alert("Allergies:\r\n" + toAlert.join("\r\n");
-          var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
 
           var fname = '';
