@@ -32,7 +32,7 @@ var allergy = smart.patient.api.fetchAll({
                       "clinical-status": "active"
                     }
                   });
-        $.when(pt, obv, allergy).fail(onError);
+        $.when(pt, obv, alg).fail(onError);
 
         $.when(pt, obv, alg).done(function(patient, obv, allergies) {
           console.log(patient);
